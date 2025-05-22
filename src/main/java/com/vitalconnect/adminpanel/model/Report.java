@@ -34,6 +34,7 @@ public class Report {
     @Column(length = 100)
     private String usuario; // quien fue reportado o generó el incidente
 
+    @Builder.Default
     @Column(name = "fecha", updatable = false) //fecha no modificable para evitar manipulaciones erroneas
     private LocalDateTime fecha = LocalDateTime.now();
 

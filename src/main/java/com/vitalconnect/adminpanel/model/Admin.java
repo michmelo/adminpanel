@@ -40,6 +40,7 @@ public class Admin {
     @Column(name = "rol")
     private String rol; // Ej. roles: super_admin (control total del sistema), moderador (puede crear y resolver reportes),auditor (puede ver todos los reportes, pero no modificar)
 
+    @Builder.Default
     @Column(name = "baneado")
     private boolean baneado = false;
 
