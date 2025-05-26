@@ -1,9 +1,12 @@
 package com.vitalconnect.adminpanel.controller;
 
+import com.vitalconnect.adminpanel.dto.UserDTO;
 import com.vitalconnect.adminpanel.exception.ResourceNotFoundException;
 import com.vitalconnect.adminpanel.model.Admin;
 import com.vitalconnect.adminpanel.model.Report;
 import com.vitalconnect.adminpanel.service.AdminService;
+import com.vitalconnect.adminpanel.service.external.UserClientService;
+
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -109,6 +112,20 @@ public class AdminController {
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    // Endpoint para obtener información de un usuario específico
+    
+    private final UserClientService userClientService;
+
+    public AdminController(UserClientService userClientService) {
+        this.userClientService = userClientService;
+    }
+
+    @GetMapping("/user-info/{id}")
+    public ResponseEntity<UserDTO> getUserInfo(@PathVariable int id) {
+        UserDTO user = userClientService.getUserByIdBlocking(id);
+        return ResponseEntity.ok(user);
     }
 
 

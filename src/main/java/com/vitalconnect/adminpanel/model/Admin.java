@@ -1,5 +1,7 @@
 package com.vitalconnect.adminpanel.model;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -37,8 +39,10 @@ public class Admin {
     private String apellido;
 
     @NotBlank
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "admin_rol", joinColumns = @JoinColumn(name = "admin_id"))
     @Column(name = "rol")
-    private String rol; // Ej. roles: super_admin (control total del sistema), moderador (puede crear y resolver reportes),auditor (puede ver todos los reportes, pero no modificar)
+    private List<String> rol; // Ej. roles: super_admin (control total del sistema), moderador (puede crear y resolver reportes),auditor (puede ver todos los reportes, pero no modificar)
 
     @Builder.Default
     @Column(name = "baneado")
