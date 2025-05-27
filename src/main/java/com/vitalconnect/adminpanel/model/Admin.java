@@ -1,7 +1,5 @@
 package com.vitalconnect.adminpanel.model;
 
-import java.util.List;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
