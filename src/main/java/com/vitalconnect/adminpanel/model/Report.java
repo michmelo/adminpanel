@@ -32,7 +32,7 @@ public class Report {
 
     @NotBlank
     @Column(length = 100)
-    private String usuario; // quien fue reportado o generó el incidente
+    private String usuario; // quien generó el incidente
 
     @Builder.Default
     @Column(name = "fecha", updatable = false) //fecha no modificable para evitar manipulaciones erroneas

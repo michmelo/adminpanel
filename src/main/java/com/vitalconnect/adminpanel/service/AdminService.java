@@ -38,10 +38,12 @@ public class AdminService {
         reportRepository.deleteById(id);
     }
 
+    //Obtener reporte por usuario
     public List<Report> getReportsByUsuario(String usuario) {
         return reportRepository.findByUsuario(usuario);
     }
 
+    //Obtener reporte por tipo
     public List<Report> getReportsByTipo(String tipo) {
         return reportRepository.findByTipo(tipo);
     }
@@ -51,25 +53,18 @@ public class AdminService {
         return adminRepository.findAll();
     }
 
+    //Crear un admin
+    public Admin createAdmin(Admin admin) {
+        return adminRepository.save(admin);
+    }
+
     //Buscar admin por id
     public Admin getAdminById(int id) {
         return adminRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Admin no encontrado con ID: " + id));
     }
 
-    //Buscar admin por rut
-    public Admin getAdminByRut(String rut) {
-        return adminRepository.findByRut(rut)
-                .orElseThrow(() -> new ResourceNotFoundException("Admin no encontrado con RUT: " + rut));
-    }
-
-
-    //Crear un admin
-    public Admin createAdmin(Admin admin) {
-        return adminRepository.save(admin);
-    }
-
-    //Actualizar un admin
+    //Actualizar un admin por id
     public Admin updateAdmin(int id, Admin adminData) {
         Admin admin = getAdminById(id);
         admin.setRut(adminData.getRut());
@@ -79,13 +74,19 @@ public class AdminService {
         admin.setBaneado(adminData.isBaneado());
         return adminRepository.save(admin);
     }
-
-
-    //Borrar un admin
+    
+    //Borrar un admin por id
     public void deleteAdmin(int id) {
         if (!adminRepository.existsById(id)) {
             throw new ResourceNotFoundException("Admin no encontrado con ID: " + id);
         }
         adminRepository.deleteById(id);
     }
+    //Buscar admin por rut
+    public Admin getAdminByRut(String rut) {
+        return adminRepository.findByRut(rut)
+                .orElseThrow(() -> new ResourceNotFoundException("Admin no encontrado con RUT: " + rut));
+    }
+
+
 }

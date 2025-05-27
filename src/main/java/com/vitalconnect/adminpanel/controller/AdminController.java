@@ -23,6 +23,8 @@ public class AdminController {
     private AdminService adminService;
 
     // CRUD de reports
+
+    //Obtener todos los reportes
     @GetMapping("/reports")
     public ResponseEntity<List<Report>> getAllReports() {
         List<Report> reports = adminService.getAllReports();
@@ -32,11 +34,13 @@ public class AdminController {
         return ResponseEntity.ok(reports);
     }
 
+    //Crear reporte
     @PostMapping("/reports")
     public ResponseEntity<Report> createReport(@Valid @RequestBody Report report) {
         return ResponseEntity.ok(adminService.createReport(report));
     }
 
+    //Borrar reporte por id
     @DeleteMapping("/reports/{id}")
     public ResponseEntity<Void> deleteReport(@PathVariable int id) {
         try {
@@ -47,12 +51,14 @@ public class AdminController {
         }
     }
 
+    //Obtener reporte por usuario
     @GetMapping("/reports/usuario/{usuario}")
     public ResponseEntity<List<Report>> getReportsByUsuario(@PathVariable String usuario) {
         List<Report> reports = adminService.getReportsByUsuario(usuario);
         return reports.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(reports);
     }
 
+    //Obtener reporte por tipo
     @GetMapping("/reports/tipo/{tipo}")
     public ResponseEntity<List<Report>> getReportsByTipo(@PathVariable String tipo) {
         List<Report> reports = adminService.getReportsByTipo(tipo);
@@ -60,7 +66,9 @@ public class AdminController {
     }
 
     // CRUD de admins
-    @GetMapping
+
+    //Obtener todos los admins
+    @GetMapping("/admins")
     public ResponseEntity<List<Admin>> getAllAdmins() {
         List<Admin> admins = adminService.getAllAdmins();
         if (admins.isEmpty()){
@@ -69,11 +77,13 @@ public class AdminController {
         return ResponseEntity.ok(admins);
     }
 
-    @PostMapping
+    //Crear un admin
+    @PostMapping("/admins")
     public ResponseEntity<Admin> createAdmin(@Valid @RequestBody Admin admin) {
         return ResponseEntity.ok(adminService.createAdmin(admin));
     }
 
+    //Buscar un admin por id
     @GetMapping("/{id}")
     public ResponseEntity<Admin> getAdminById(@PathVariable int id) {
         try {
@@ -84,6 +94,7 @@ public class AdminController {
         }
     }
 
+    //Actualizar un admin por id
     @PutMapping("/{id}")
     public ResponseEntity<Admin> updateAdmin(@PathVariable int id, @Valid @RequestBody Admin admin) {
         try {
@@ -94,6 +105,7 @@ public class AdminController {
         }
     }
 
+    //Borrar un admin por id
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAdmin(@PathVariable int id) {
         try {
@@ -104,6 +116,7 @@ public class AdminController {
         }
     }
 
+    // Buscar un admin por rut
     @GetMapping("/rut/{rut}")
     public ResponseEntity<Admin> getAdminByRut(@PathVariable String rut) {
         try {

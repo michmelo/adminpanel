@@ -14,22 +14,11 @@ public class UserClientService {
         this.webClient = userWebClient;
     }
 
-    // Reactivo
-    /*
-    public Mono<UserDTO> getUserById(Long userId) {
-        return webClient.get()
-                .uri("/users/{id}", userId)
-                .retrieve()
-                .bodyToMono(UserDTO.class);
-    }
-    */
-
-    // Bloqueante
     public UserDTO getUserByIdBlocking(int id) {
         return webClient.get()
                 .uri("/users/{id}", id)
                 .retrieve()
                 .bodyToMono(UserDTO.class)
-                .block(); // Solo usar fuera de entornos reactivos
+                .block();
     }
 }

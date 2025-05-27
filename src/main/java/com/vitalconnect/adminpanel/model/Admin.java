@@ -38,14 +38,11 @@ public class Admin {
     @Column(name = "apellido", length = 100)
     private String apellido;
 
-    @NotBlank
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "admin_rol", joinColumns = @JoinColumn(name = "admin_id"))
+    @NotBlank(message = "Es obligatorio registrar un rol.")
     @Column(name = "rol")
-    private List<String> rol; // Ej. roles: super_admin (control total del sistema), moderador (puede crear y resolver reportes),auditor (puede ver todos los reportes, pero no modificar)
+    private String rol; // Ej. roles: super_admin (control total del sistema), moderador (puede crear y resolver reportes),auditor (puede ver todos los reportes, pero no modificar)
 
     @Builder.Default
     @Column(name = "baneado")
     private boolean baneado = false;
-
 }
