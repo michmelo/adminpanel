@@ -10,5 +10,6 @@ import java.util.List;
 public interface ReportRepository extends JpaRepository<Report, Integer> {
     List<Report> findByUsuario(String usuario);
     List<Report> findByTipo(String tipo);
+    boolean existsByTipoAndMensajeAndUsuario(String tipo, String mensaje, String usuario);
 
 }
