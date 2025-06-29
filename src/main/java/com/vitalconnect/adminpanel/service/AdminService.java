@@ -88,5 +88,15 @@ public class AdminService {
                 .orElseThrow(() -> new ResourceNotFoundException("Admin no encontrado con RUT: " + rut));
     }
 
+    public Admin save(Admin admin) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'save'");
+    }
+
+    public void deleteByRut(String rut) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'deleteByRut'");
+    }
+
 
 }

@@ -11,4 +11,5 @@ import java.util.Optional;
 public interface AdminRepository extends JpaRepository<Admin, Integer> {
     Optional<Admin> findByRut(String rut);
     boolean existsByRut(String rut);
+    void deleteByRut(String rut);
 }
