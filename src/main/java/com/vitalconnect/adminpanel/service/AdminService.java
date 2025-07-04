@@ -89,13 +89,11 @@ public class AdminService {
     }
 
     public Admin save(Admin admin) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
+        return adminRepository.save(admin);
     }
 
     public void deleteByRut(String rut) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteByRut'");
+        adminRepository.deleteByRut(rut);
     }
 
 

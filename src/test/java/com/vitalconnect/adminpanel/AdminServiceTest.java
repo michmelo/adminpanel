@@ -10,19 +10,23 @@ import static org.mockito.Mockito.when;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 //import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.vitalconnect.adminpanel.model.Admin;
 import com.vitalconnect.adminpanel.repository.AdminRepository;
 import com.vitalconnect.adminpanel.service.AdminService;
 
+import jakarta.inject.Inject;
+
 @SpringBootTest
 public class AdminServiceTest {
 
-    @Autowired
+    @InjectMocks
     private AdminService adminService;
 
     @Mock
@@ -30,13 +34,16 @@ public class AdminServiceTest {
 
     @Test
     public void testGetAllAdmins() {
-        when(adminRepository.findAll()).thenReturn(List.of(new Admin(0, null, null, null, null, false))); 
-        
+        Admin mockAdmin = new Admin(1, "12345678-9", "Camila", "Rojas", "Admin", false);
+        when(adminRepository.findAll()).thenReturn(List.of(mockAdmin));
+
         List<Admin> admins = adminService.getAllAdmins();
 
         assertNotNull(admins);
         assertEquals(1, admins.size());
+        assertEquals("Camila", admins.get(0).getNombre());
     }
+
 
     @Test
     public void testGetAdminByRut() {
@@ -45,6 +52,7 @@ public class AdminServiceTest {
         when(adminRepository.findByRut(rut)).thenReturn(java.util.Optional.of(admin));
 
         Admin foundAdmin = adminService.getAdminByRut(rut);
+
         assertNotNull(foundAdmin);
         assertEquals(rut, foundAdmin.getRut());
     }
@@ -55,6 +63,7 @@ public class AdminServiceTest {
         when(adminRepository.save(admin)).thenReturn(admin);
 
         Admin savedAdmin = adminService.save(admin);
+
         assertNotNull(savedAdmin);
         assertEquals("Jane", savedAdmin.getNombre());
     }
@@ -64,6 +73,7 @@ public class AdminServiceTest {
         String rut = "12345678-9";
         doNothing().when(adminRepository).deleteByRut(rut);
         adminService.deleteByRut(rut);
+        
         verify(adminRepository, times(1)).deleteByRut(rut);
     }
 }
