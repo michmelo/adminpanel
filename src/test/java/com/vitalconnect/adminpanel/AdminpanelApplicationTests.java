@@ -8,6 +8,7 @@ class AdminpanelApplicationTests {
 
 	@Test
 	void contextLoads() {
+		System.out.println("✅ Contexto cargado con éxito");
 	}
 
 }

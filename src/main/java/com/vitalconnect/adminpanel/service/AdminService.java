@@ -88,5 +88,13 @@ public class AdminService {
                 .orElseThrow(() -> new ResourceNotFoundException("Admin no encontrado con RUT: " + rut));
     }
 
+    public Admin save(Admin admin) {
+        return adminRepository.save(admin);
+    }
+
+    public void deleteByRut(String rut) {
+        adminRepository.deleteByRut(rut);
+    }
+
 
 }
